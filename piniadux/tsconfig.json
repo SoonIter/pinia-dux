@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "esnext",
+    "declaration": true,
+    "outDir": "./dist",
+    //输出文件
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "isolatedModules": true,
+    //    "noEmit": true,
+    "jsx": "react-jsx",
+    "removeComments": true,
+    // 删除所有注释，除了以 /!* 开头的版权信息。
+    "downlevelIteration": true,
+    "noImplicitAny": false,
+    "noUnusedLocals": false
+  },
+  "include": [
+    "./index.ts",
+    //需要编译的文件
+  ],
+  "exclude": [
+    "dist",
+    "node_modules"
+  ]
+}
