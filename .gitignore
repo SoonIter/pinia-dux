@@ -12,7 +12,7 @@
 /docs-dist
 
 # misc
-.DS_Store
+**/.DS_Store
 /coverage
 
 # umi
@@ -22,9 +22,12 @@
 .env.local
 
 # ide
-/.vscode
-/.idea
+**/.vscode
+**/.idea
 
 **/.npmrc
 **/dist
 **/node_modules
+
+**/yarn-err.*
+**/yarn.lock

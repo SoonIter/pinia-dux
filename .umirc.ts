@@ -84,6 +84,10 @@ export default defineConfig({
           },
         ],
       },
+      {
+        title: '案例',
+        path: '/zh-CN/demo',
+      },
     ],
   },
 });
