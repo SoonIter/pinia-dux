@@ -1,11 +1,11 @@
 {
   "name": "piniadux",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "这是一个根据pinia API风格写的react状态管理库",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "release": "npm publish"
+    "release": "npx tsc && npm publish"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
@@ -44,10 +44,10 @@
     "rollup": "^2.70.1",
     "rollup-plugin-jsx": "^1.0.3",
     "tslib": "^2.3.1",
-    "typescript": "^4.6.3"
+    "typescript": "^4.6.3",
+    "@testing-library/react-hooks": "^8.0.0"
   },
   "dependencies": {
-    "@testing-library/react-hooks": "^8.0.0"
   },
   "files": [
     "dist",

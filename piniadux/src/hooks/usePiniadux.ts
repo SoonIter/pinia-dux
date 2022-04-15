@@ -1,7 +1,10 @@
 import { useEffect, useRef } from 'react';
 import { defineStore } from '../core/defineStore';
-import type { IOption } from '../types/IOption';
 import useForceUpdate from './useForceUpdate';
+
+interface IOption<IState extends Object> {
+  state: () => IState;
+}
 
 const useStore = <store extends Object>(val: store) => {
   //为了在React开发者工具上有显示
@@ -36,7 +39,7 @@ function usePiniadux<IState extends Object>(
     return () => {
       store.observer.removeTask(update);
     };
-  }, [forceUpdate, store]);
+  }, []);
   return store;
 }
 

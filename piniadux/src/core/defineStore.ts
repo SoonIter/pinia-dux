@@ -1,8 +1,8 @@
 import Observer from './Observer';
 import { EffectCallback } from 'react';
-
-import { IOption } from '../types/IOption';
-
+interface IOption<IState extends Object> {
+  state: () => IState;
+}
 const storeBucket = new Map(); //存储所有id => observer
 
 function defineStore<IState extends Object>(

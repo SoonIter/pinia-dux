@@ -16,7 +16,6 @@ const useUserStore = () =>
   });
 const Demo2: FC = () => {
   const { store } = useUserStore();
-
   return (
     <>
       <div style={{ padding: '10px', margin: '10px', border: '1px solid red' }}>
@@ -30,6 +29,7 @@ const Demo2: FC = () => {
 };
 const Demo: FC = () => {
   const { store, reset } = useUserStore();
+  // console.log('render Demo');
   return (
     <>
       <button
