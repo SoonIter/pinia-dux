@@ -31,3 +31,4 @@
 
 **/yarn-err.*
 **/yarn.lock
+**.lock
