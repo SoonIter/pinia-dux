@@ -22,25 +22,23 @@ describe('usePiniadux', () => {
     expect(usePiniadux).toBeDefined();
   });
 
-  // it('useLatest with basic variable should work', async () => {
-  //   const { result, rerender } = setUp(0);
+  it('usePiniadux with basic variable should work', async () => {
+    const { result, rerender } = setUp();
+    rerender();
 
-  //   rerender(1);
-  //   expect(result.current.current).toEqual(1);
+    expect(result.current.store.a).toEqual(1);
+    result.current.store.a = 10;
+    expect(result.current.store.a).toEqual(10);
+    rerender();
+    expect(result.current.store.a).toEqual(10);
+  });
 
-  //   rerender(2);
-  //   expect(result.current.current).toEqual(2);
-
-  //   rerender(3);
-  //   expect(result.current.current).toEqual(3);
-  // });
-
-  // it('useLatest with reference variable should work', async () => {
-  //   const { result, rerender } = setUp({});
-
-  //   expect(result.current.current).toEqual({});
-
-  //   rerender([]);
-  //   expect(result.current.current).toEqual([]);
-  // });
+  it('usePiniadux with reference variable should work', async () => {
+    const { result, rerender } = setUp();
+    expect(result.current.store.b.c).toEqual(1);
+    result.current.store.b.c = 10;
+    expect(result.current.store.b.c).toEqual(10);
+    rerender();
+    expect(result.current.store.b.c).toEqual(10);
+  });
 });

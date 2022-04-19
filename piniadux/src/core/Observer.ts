@@ -1,18 +1,22 @@
 const debounce = (fn) => {
   let timer: null | number = null;
-  return function (...args) {
+  return function (this: any, ...args) {
     if (timer) {
       clearTimeout(timer);
     }
     timer = window.setTimeout(() => {
       fn.apply(this, args);
-    }, 50);
+    }, 500);
   };
 };
 
 type ValueOf<T> = T[keyof T];
 type EffectFunc = () => (() => void) | void;
 type PropertyKey = string | symbol;
+
+const currentState = {
+  updateFunc: () => {},
+};
 
 class Observer<T extends Object> {
   private primaryObj: T;
@@ -33,10 +37,11 @@ class Observer<T extends Object> {
     }
     const that = this;
     const proxyObj = new Proxy(obj, {
-      get(target: T, p: keyof T): ValueOf<T> {
+      get(target, p) {
+        that.addTask(currentState.updateFunc);
         return target[p];
       },
-      set(target: T, p: keyof T, value: unknown): boolean {
+      set(target, p, value: unknown): boolean {
         if (!Object.is(target[p], value)) {
           Reflect.set(
             target,
@@ -75,7 +80,7 @@ class Observer<T extends Object> {
     this.globalEffectFuncQueue.delete(Task);
   }
 
-  runTaskQueue = debounce(function () {
+  runTaskQueue = debounce(function (this: Observer<T>) {
     Promise.resolve().then(() => {
       this.globalEffectFuncQueue.forEach((F) => F());
     });

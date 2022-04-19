@@ -1,5 +1,0 @@
-const useDrag = () => {
-  <>
-    <div></div>
-  </>;
-};
