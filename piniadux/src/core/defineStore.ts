@@ -30,8 +30,9 @@ function defineStore<IState extends Object>(
   };
 
   if (option?.pageState === true) {
-    if (!channelBucket.has(String(id))) {
-      const channel = new BroadcastChannel(String(id));
+    const channelId = `pinia-${id}`;
+    if (!channelBucket.has(channelId)) {
+      const channel = new BroadcastChannel(channelId);
       const emit = (newState) => {
         channel.postMessage(newState);
       };
@@ -42,9 +43,8 @@ function defineStore<IState extends Object>(
         }
         observer.reset(data, [emit]);
       };
-      channelBucket.set(String(id), channel);
+      channelBucket.set(channelId, channel);
       channel.postMessage('need update');
-      console.log('I need update');
       observer.addTask(emit);
     }
   }

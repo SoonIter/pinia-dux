@@ -15,4 +15,10 @@
 
 用 Vue pinia 的 api 写 React
 
+目前支持持久化，和多页面状态同步。
+
+want some guidance and friends.
+
+qq1730214056
+
 [中文官网](https://sooniter.github.io/pinia-dux/#/zh-CN)
