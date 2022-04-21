@@ -1,29 +1,47 @@
-const debounce = (fn) => {
+const setMicroTask = window?.requestIdleCallback || setTimeout;
+const debounce = (fn, delay = 0) => {
   let timer: null | number = null;
   return function (this: any, ...args) {
     if (timer) {
       clearTimeout(timer);
     }
-    timer = window.setTimeout(() => {
+    timer = setMicroTask(() => {
       fn.apply(this, args);
-    }, 500);
+    });
   };
 };
 
 type ValueOf<T> = T[keyof T];
-type EffectFunc = () => (() => void) | void;
+type EffectFunc<T> = (newState?: T) => void;
 type PropertyKey = string | symbol;
 
 const currentState = {
   updateFunc: () => {},
 };
-
+//两者不相等 为false 相等为true
+function diff(obj1, obj2) {
+  if (Object.is(obj1, obj2)) {
+    return true;
+  }
+  for (let key in obj1) {
+    if (Object.is(obj1[key], obj2[key])) {
+      continue;
+    }
+    if (typeof obj1[key] === 'object') {
+      if (diff(obj1[key], obj2[key]) === false) {
+        return false;
+      } else {
+        continue;
+      }
+    }
+    return false;
+  }
+  return true;
+}
 class Observer<T extends Object> {
-  private primaryObj: T;
+  public primaryObj: T;
   public proxyObj: T;
-
-  private globalEffectFuncQueue = new Set<EffectFunc>();
-  public reset: Function | undefined;
+  private globalEffectFuncQueue = new Set<EffectFunc<T>>();
 
   constructor(obj: T) {
     const proxyObj = this.createProxy(obj);
@@ -38,7 +56,7 @@ class Observer<T extends Object> {
     const that = this;
     const proxyObj = new Proxy(obj, {
       get(target, p) {
-        that.addTask(currentState.updateFunc);
+        // that.addTask(currentState.updateFunc);
         return target[p];
       },
       set(target, p, value: unknown): boolean {
@@ -69,22 +87,32 @@ class Observer<T extends Object> {
     const proxyObj = this.createProxy(obj) as T;
     this.primaryObj = obj;
     this.proxyObj = proxyObj;
-    this.runTaskQueue();
+  }
+  reset(obj: T, filter: EffectFunc<T>[] = []) {
+    if (diff(obj, this.primaryObj) === true) {
+      return;
+    }
+    this.initialize(obj);
+    this.runTaskQueue(filter);
   }
 
-  addTask(Task: EffectFunc) {
+  addTask(Task: EffectFunc<T>) {
     this.globalEffectFuncQueue.add(Task);
   }
 
-  removeTask(Task: EffectFunc) {
+  removeTask(Task: EffectFunc<T>) {
     this.globalEffectFuncQueue.delete(Task);
   }
 
-  runTaskQueue = debounce(function (this: Observer<T>) {
-    Promise.resolve().then(() => {
-      this.globalEffectFuncQueue.forEach((F) => F());
-    });
-  });
+  runTaskQueue = debounce(function (
+    this: Observer<T>,
+    filter: EffectFunc<T>[] = [],
+  ) {
+    [...this.globalEffectFuncQueue]
+      .filter((f) => !filter.includes(f))
+      .forEach((F) => F(this.primaryObj));
+  },
+  0);
 }
 
 export default Observer;

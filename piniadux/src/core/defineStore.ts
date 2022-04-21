@@ -1,10 +1,13 @@
 import Observer from './Observer';
 import { EffectCallback } from 'react';
+
 interface IOption<IState extends Object> {
   state: () => IState;
+  pageState?: boolean;
 }
-const storeBucket = new Map(); //存储所有id => observer
 
+const storeBucket = new Map(); //存储所有id => observer
+const channelBucket = new Map(); //存储所有id => BroadcastChannel
 function defineStore<IState extends Object>(
   id: string | Symbol,
   option?: IOption<IState>,
@@ -21,14 +24,33 @@ function defineStore<IState extends Object>(
     }
     observer = new Observer(option!.state());
     storeBucket.set(id, observer);
-    observer.reset = () => {
-      observer.initialize(option!.state());
-      storeBucket.set(id, observer);
-    };
+  }
+  const reset = (newState?: IState) => {
+    observer.reset(newState || option!.state());
+  };
+
+  if (option?.pageState === true) {
+    if (!channelBucket.has(String(id))) {
+      const channel = new BroadcastChannel(String(id));
+      const emit = (newState) => {
+        channel.postMessage(newState);
+      };
+      channel.onmessage = ({ data }) => {
+        if (data === 'need update') {
+          channel.postMessage(observer.primaryObj);
+          return;
+        }
+        observer.reset(data, [emit]);
+      };
+      channelBucket.set(String(id), channel);
+      channel.postMessage('need update');
+      console.log('I need update');
+      observer.addTask(emit);
+    }
   }
   return {
     store: observer.proxyObj,
-    reset: observer.reset as Function,
+    reset,
     observer: observer,
   };
 }

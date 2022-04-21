@@ -1,10 +1,6 @@
 import { useEffect, useRef } from 'react';
-import { defineStore } from '../core/defineStore';
+import { defineStore, IOption } from '../core/defineStore';
 import useForceUpdate from './useForceUpdate';
-
-interface IOption<IState extends Object> {
-  state: () => IState;
-}
 
 const useStore = <store extends Object>(val: store) => {
   //为了在React开发者工具上有显示
@@ -13,8 +9,11 @@ const useStore = <store extends Object>(val: store) => {
   return storeRef;
 };
 
-/*
+/**
  *
+ * @param id
+ * @param option
+ * @returns IState
  * @example
  * const {store} = usePiniadux("key", {
  *  state() {
@@ -23,7 +22,7 @@ const useStore = <store extends Object>(val: store) => {
  *    };
  *  },
  *});
- * */
+ */
 function usePiniadux<IState extends Object>(
   id: string | symbol,
   option?: IOption<IState>,
@@ -32,12 +31,18 @@ function usePiniadux<IState extends Object>(
   useStore(store.store);
   const forceUpdate = useForceUpdate();
   useEffect(() => {
+    const removeTasks: (() => void)[] = [];
+
+    //把update任务放到最后
     const update = () => {
       forceUpdate();
     };
+    removeTasks.push(() => {
+      store.observer.removeTask(update);
+    });
     store.observer.addTask(update);
     return () => {
-      store.observer.removeTask(update);
+      removeTasks.forEach((f) => f());
     };
   }, []);
   return store;

@@ -1,6 +1,6 @@
 {
   "name": "piniadux",
-  "version": "1.1.0",
+  "version": "1.2.1",
   "description": "这是一个根据pinia API风格写的react状态管理库",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
