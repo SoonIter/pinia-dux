@@ -19,7 +19,7 @@
 
 目前支持持久化，和多页面状态同步。
 
-want some guidance and friends.
+wanna get some guidance and friends.
 
 qq1730214056
 

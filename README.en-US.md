@@ -21,5 +21,4 @@ want some guidance and friends.
 
 qq1730214056
 
-[中文文档](https://sooniter.github.io/pinia-dux/#/zh-CN)
-[English docs](https://sooniter.github.io/pinia-dux/#/)
+[中文文档](https://sooniter.github.io/pinia-dux/#/zh-CN)｜[English docs](https://sooniter.github.io/pinia-dux/#/)
