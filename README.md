@@ -11,6 +11,8 @@
 
 # Pinia-dux
 
+[中文](./README.md) | [English](./README.en-US.md)
+
 一个 piniaAPI 风格的 react 状态管理库。
 
 用 Vue pinia 的 api 写 React
@@ -21,4 +23,4 @@ want some guidance and friends.
 
 qq1730214056
 
-[中文](./README.md) | [English](./README.en-US.md)
+[中文文档](https://sooniter.github.io/pinia-dux/#/zh-CN)
