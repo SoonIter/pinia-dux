@@ -11,14 +11,15 @@
 
 # Pinia-dux
 
-一个 piniaAPI 风格的 react 状态管理库。
+[中文](./README.md) | [English](./README.en-US.md)
 
-用 Vue pinia 的 api 写 React
-
-目前支持持久化，和多页面状态同步。
+A piniaAPI-style react state management library.
+Writing React with Vue pinia's api currently supports persistence,
+and multi-page state synchronization.
 
 want some guidance and friends.
 
 qq1730214056
 
-[中文](./README.md) | [English](./README.en-US.md)
+[中文文档](https://sooniter.github.io/pinia-dux/#/zh-CN)
+[English docs](https://sooniter.github.io/pinia-dux/#/)
