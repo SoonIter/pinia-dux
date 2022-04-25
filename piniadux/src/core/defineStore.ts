@@ -37,14 +37,14 @@ function defineStore<IState extends Object>(
         channel.postMessage(newState);
       };
       channel.onmessage = ({ data }) => {
-        if (data === 'need update') {
+        if (data === 'need update' + channelId) {
           channel.postMessage(observer.primaryObj);
           return;
         }
         observer.reset(data, [emit]);
       };
       channelBucket.set(channelId, channel);
-      channel.postMessage('need update');
+      channel.postMessage('need update' + channelId);
       observer.addTask(emit);
     }
   }
