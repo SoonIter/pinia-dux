@@ -1,19 +1,6 @@
 import withPiniadux from './src/HOC/withPiniadux/withPiniadux';
-import { usePiniadux } from './src/hooks/usePiniadux';
-import {
-  defineStore,
-  getStoreById,
-  addStoreTaskById,
-  removeStoreTaskById,
-} from './src/core/defineStore';
+import usePiniadux from './src/hooks/usePiniadux';
 import { persistByKey } from './src/persist/persist';
+import useMoveTransition from './src/hooks/useMoveTransition';
 
-export {
-  withPiniadux,
-  usePiniadux,
-  defineStore,
-  getStoreById,
-  addStoreTaskById,
-  removeStoreTaskById,
-  persistByKey,
-};
+export { withPiniadux, usePiniadux, useMoveTransition, persistByKey };

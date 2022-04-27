@@ -1,4 +1,4 @@
-//TODO:这里在寻找react实现增量更新的方式。
+//TODO:这里在寻找react实现增量更新的方式。解决依赖收集的问题。
 type ValueOf<T> = T[keyof T];
 type EffectFunc = () => (() => void) | void;
 type PropertyKey = string | symbol;
