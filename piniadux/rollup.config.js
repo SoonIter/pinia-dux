@@ -5,7 +5,7 @@ import babel, { getBabelOutputPlugin } from '@rollup/plugin-babel';
 import jsx from 'acorn-jsx';
 
 export default {
-  input: "./index.ts",
+  input: './index.ts',
   acornInjectPlugins: [jsx()],
   external: ['react'], // 增加了这一行。
   plugins: [
@@ -15,8 +15,8 @@ export default {
     babel({
       presets: ['@babel/preset-react'],
       babelHelpers: 'bundled',
-      extensions: ['.js', '.jsx', '.es6', '.es', '.mjs', '.ts', '.tsx']
-    })
+      extensions: ['.js', '.jsx', '.es6', '.es', '.mjs', '.ts', '.tsx'],
+    }),
   ],
   output: {
     file: 'dist/bundle.js',
@@ -24,7 +24,7 @@ export default {
     plugins: [
       getBabelOutputPlugin({
         presets: ['@babel/preset-env'],
-      })
-    ]
+      }),
+    ],
   },
-}
+};

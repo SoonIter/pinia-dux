@@ -5,11 +5,7 @@
     "declaration": true,
     "outDir": "./dist",
     //输出文件
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -27,11 +23,8 @@
     "noUnusedLocals": false
   },
   "include": [
-    "./index.ts",
+    "./index.ts"
     //需要编译的文件
   ],
-  "exclude": [
-    "dist",
-    "node_modules"
-  ]
+  "exclude": ["dist", "node_modules"]
 }
