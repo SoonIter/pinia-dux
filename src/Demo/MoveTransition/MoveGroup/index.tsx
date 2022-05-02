@@ -1,12 +1,10 @@
 import React, { FC, useReducer, useRef, useState } from 'react';
 
-import useMoveTransition from '../../../../piniadux/src/hooks/useMoveTransition';
-import { usePiniadux } from '../../../../piniadux/index';
+import { useMoveTransition, usePiniadux } from 'piniadux';
 
 const Demo: FC<{ id: string }> = (props) => {
   const el = useRef<HTMLDivElement>(null);
   const { id } = props;
-  const idRef = useRef(id);
   useMoveTransition(el, id);
   return (
     <>
@@ -49,6 +47,7 @@ export default () => {
           </div>
         ) : (
           <div style={{ position: 'relative', left: 500 }}>
+            {/* 多嵌套一层用于骗过React的diff算法 */}
             <div>
               {store.list.map((item, index) => (
                 <Demo id={String(item)} key={item} />

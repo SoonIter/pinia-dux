@@ -1,5 +1,5 @@
 import React from 'react';
-import usePiniadux from '../../../piniadux/src/hooks/usePiniadux';
+import { usePiniadux } from 'piniadux';
 
 function BroadcastChannelTest() {
   const { store } = usePiniadux('BroadcastChannelTestNumber', {

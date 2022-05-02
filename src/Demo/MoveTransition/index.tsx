@@ -1,6 +1,6 @@
 import React, { FC, RefObject, useReducer, useRef, useState } from 'react';
 
-import useMoveTransition from '../../../piniadux/src/hooks/useMoveTransition';
+import { useMoveTransition } from 'piniadux';
 
 const id = Symbol('id');
 

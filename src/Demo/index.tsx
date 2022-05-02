@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { usePiniadux } from '../../piniadux/src/hooks/usePiniadux';
+import { usePiniadux } from 'piniadux';
 
 const USER = Symbol('user');
 const useUserStore = () =>

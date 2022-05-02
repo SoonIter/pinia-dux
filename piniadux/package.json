@@ -49,6 +49,7 @@
     "web-vitals": "^2.1.4"
   },
   "dependencies": {
+    "react": "^16.8.0 || ^17.0.0 || ^18.0.0"
   },
   "files": [
     "dist",
