@@ -22,11 +22,11 @@
     "noImplicitAny": false,
     "noUnusedLocals": false
   },
-  "include": ["src", "src/index.ts"],
+  "include": ["src/index.ts"],
   "references": [
     {
       "path": "./tsconfig.node.json"
     }
   ],
-  "exclude": ["dist", "node_modules"]
+  "exclude": ["dist", "node_modules", "**.test.ts", "**.test.tsx"]
 }

@@ -33,10 +33,9 @@
     "url": "https://github.com/sooniter/pinia-dux/issues"
   },
   "homepage": "https://sooniter.github.io/pinia-dux/#/zh-CN",
-  "peerDependencies": {
-    "react": "latest || latest || latest"
-  },
   "devDependencies": {
+    "@testing-library/react-hooks": "^8.0.0",
+    "@types/react-test-renderer": "latest",
     "@types/react": "latest",
     "@vitejs/plugin-react": "latest",
     "@vitest/ui": "latest",
@@ -45,13 +44,11 @@
     "react": "latest",
     "react-dom": "latest",
     "react-test-renderer": "latest",
-    "vitest": "latest",
-    "vite": "latest"
+    "vite": "latest",
+    "vitest": "latest"
   },
   "files": [
     "dist",
-    "lib",
-    "es",
     "package.json",
     "README.md",
     "LICENSE"
