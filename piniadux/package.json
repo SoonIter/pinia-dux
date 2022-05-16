@@ -10,7 +10,8 @@
     "release": "npx tsc && npm publish",
     "coverage": "vitest run --coverage",
     "test": "vitest",
-    "test:ui": "vitest --ui"
+    "test:ui": "vitest --ui",
+    "format": "prettier --write ."
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"

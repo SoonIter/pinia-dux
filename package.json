@@ -1,5 +1,4 @@
 {
-  "private": true,
   "name": "pinia-dux",
   "version": "1.0.0",
   "type": "module",

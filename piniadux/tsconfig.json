@@ -15,7 +15,7 @@
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
     "isolatedModules": true,
-    "jsx": "react-jsx",
+    "jsx": "react",
     "removeComments": true,
     // 删除所有注释，除了以 /!* 开头的版权信息。
     "downlevelIteration": true,
@@ -23,10 +23,5 @@
     "noUnusedLocals": false
   },
   "include": ["src/index.ts"],
-  "references": [
-    {
-      "path": "./tsconfig.node.json"
-    }
-  ],
   "exclude": ["dist", "node_modules", "**.test.ts", "**.test.tsx"]
 }
