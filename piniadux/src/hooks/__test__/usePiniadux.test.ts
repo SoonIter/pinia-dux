@@ -1,8 +1,8 @@
 import { renderHook } from '@testing-library/react-hooks';
+import { describe, expect, test, it } from 'vitest';
 import { usePiniadux } from '../usePiniadux';
 
 const USER = Symbol('user');
-
 const setUp = () =>
   renderHook(() =>
     usePiniadux(USER, {

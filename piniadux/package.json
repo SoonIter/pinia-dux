@@ -1,11 +1,15 @@
 {
   "name": "piniadux",
-  "version": "1.3.3",
+  "type": "module",
+  "version": "latest",
   "description": "这是一个根据pinia API风格写的react状态管理库",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "release": "npx tsc && npm publish"
+    "release": "npx tsc && npm publish",
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
@@ -30,26 +34,19 @@
   },
   "homepage": "https://sooniter.github.io/pinia-dux/#/zh-CN",
   "peerDependencies": {
-    "react": "^16.8.0 || ^17.0.0 || ^18.0.0"
+    "react": "latest || latest || latest"
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^5.16.4",
-    "@testing-library/react": "^13.0.1",
-    "@testing-library/react-hooks": "^8.0.0",
-    "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^27.4.1",
-    "@types/node": "^16.11.27",
-    "@types/react": "^18.0.5",
-    "@types/react-dom": "^18.0.1",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "react-scripts": "5.0.1",
-    "react-test-renderer": "^18.0.0",
-    "typescript": "^4.6.3",
-    "web-vitals": "^2.1.4"
-  },
-  "dependencies": {
-    "react": "^16.8.0 || ^17.0.0 || ^18.0.0"
+    "@types/react": "latest",
+    "@vitejs/plugin-react": "latest",
+    "@vitest/ui": "latest",
+    "happy-dom": "latest",
+    "jsdom": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "react-test-renderer": "latest",
+    "vitest": "latest",
+    "vite": "latest"
   },
   "files": [
     "dist",

@@ -21,6 +21,8 @@
 .umi-test
 .env.local
 
+# test
+**/coverage
 # ide
 **/.vscode
 **/.idea

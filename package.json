@@ -2,6 +2,7 @@
   "private": true,
   "name": "pinia-dux",
   "version": "1.0.0",
+  "type": "module",
   "scripts": {
     "start": "dumi dev",
     "docs:build": "dumi build",
@@ -27,9 +28,6 @@
     ]
   },
   "dependencies": {
-    "piniadux": "^1.3.3",
-    "react-test-renderer": "^18.0.0",
-    "typescript": "^4.6.3",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.0.1",
     "@testing-library/react-hooks": "^8.0.0",
@@ -38,9 +36,12 @@
     "@types/node": "^16.11.27",
     "@types/react": "^18.0.5",
     "@types/react-dom": "^18.0.1",
+    "piniadux": "^1.3.3",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "react-scripts": "5.0.1"
+    "react-scripts": "5.0.1",
+    "react-test-renderer": "^18.0.0",
+    "typescript": "^4.6.3"
   },
   "devDependencies": {
     "@types/jest": "^27.4.1",

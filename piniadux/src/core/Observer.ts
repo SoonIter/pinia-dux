@@ -1,4 +1,6 @@
-const setMicroTask = window?.requestIdleCallback || setTimeout;
+const setMicroTask =
+  // (window && window?.requestIdleCallback) ||
+  setTimeout;
 const debounce = (fn, delay = 0) => {
   let timer: null | number = null;
   return function (this: any, ...args) {
@@ -7,7 +9,7 @@ const debounce = (fn, delay = 0) => {
     }
     timer = setMicroTask(() => {
       fn.apply(this, args);
-    });
+    }) as unknown as number;
   };
 };
 
