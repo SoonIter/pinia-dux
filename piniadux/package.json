@@ -6,10 +6,11 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
+    "build": "tsc",
     "release": "npx tsc && npm publish",
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
+    "coverage": "vitest run --coverage",
+    "test": "vitest",
+    "test:ui": "vitest --ui"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
