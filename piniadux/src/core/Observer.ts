@@ -1,25 +1,4 @@
-const setMicroTask =
-  // (window && window?.requestIdleCallback) ||
-  setTimeout;
-const debounce = (fn, delay = 0) => {
-  let timer: null | number = null;
-  return function (this: any, ...args) {
-    if (timer) {
-      clearTimeout(timer);
-    }
-    timer = setMicroTask(() => {
-      fn.apply(this, args);
-    }) as unknown as number;
-  };
-};
-
-type ValueOf<T> = T[keyof T];
-type EffectFunc<T> = (newState?: T) => void;
-type PropertyKey = string | symbol;
-
-const currentState = {
-  updateFunc: () => {},
-};
+type EffectFunc<T> = (draft?: T) => void;
 //两者不相等 为false 相等为true
 function diff(obj1, obj2) {
   if (Object.is(obj1, obj2)) {
@@ -43,8 +22,9 @@ function diff(obj1, obj2) {
 class Observer<T extends Object> {
   public primaryObj: T;
   public proxyObj: T;
-  private globalEffectFuncQueue = new Set<EffectFunc<T>>();
-
+  private effectQueue = new Set<EffectFunc<T>>();
+  private primaryToProxyMap = new WeakMap<Object, Object>();
+  private currEffect: EffectFunc<T> | null = null;
   constructor(obj: T) {
     const proxyObj = this.createProxy(obj);
     this.primaryObj = obj;
@@ -58,30 +38,23 @@ class Observer<T extends Object> {
     const that = this;
     const proxyObj = new Proxy(obj, {
       get(target, p) {
-        // that.addTask(currentState.updateFunc);
+        if (typeof target[p] === 'object' && target[p] !== null) {
+          return (
+            that.primaryToProxyMap.get(target[p]) || that.createProxy(target[p])
+          );
+        }
         return target[p];
       },
       set(target, p, value: unknown): boolean {
-        if (!Object.is(target[p], value)) {
-          Reflect.set(
-            target,
-            p,
-            typeof value === 'object' && value !== null
-              ? that.createProxy(value)
-              : value,
-          );
-
-          that.runTaskQueue();
+        if (Object.is(target[p], value)) {
+          return true;
         }
-        return true;
+        const res = Reflect.set(target, p, value);
+        that.runEffectQueue();
+        return res;
       },
     });
-    let key: keyof typeof obj;
-    for (key in obj) {
-      if (typeof obj[key] === 'object') {
-        obj[key] = this.createProxy(obj[key]) as any;
-      }
-    }
+    that.primaryToProxyMap.set(obj, proxyObj);
     return proxyObj as T;
   }
 
@@ -95,26 +68,27 @@ class Observer<T extends Object> {
       return;
     }
     this.initialize(obj);
-    this.runTaskQueue(filter);
+    this.runEffectQueue(filter);
   }
 
-  addTask(Task: EffectFunc<T>) {
-    this.globalEffectFuncQueue.add(Task);
+  addEffect(Effect: EffectFunc<T>) {
+    this.effectQueue.add(Effect);
   }
 
-  removeTask(Task: EffectFunc<T>) {
-    this.globalEffectFuncQueue.delete(Task);
+  removeEffect(Effect: EffectFunc<T>) {
+    this.effectQueue.delete(Effect);
   }
-
-  runTaskQueue = debounce(function (
-    this: Observer<T>,
-    filter: EffectFunc<T>[] = [],
-  ) {
-    [...this.globalEffectFuncQueue]
-      .filter((f) => !filter.includes(f))
-      .forEach((F) => F(this.primaryObj));
-  },
-  0);
+  runEffect(fn: EffectFunc<T>, schedular = {}) {
+    this.currEffect = fn;
+    const res = fn.call(null, this.proxyObj);
+    this.currEffect = null;
+    return res;
+  }
+  runEffectQueue = function (this: Observer<T>, filter: EffectFunc<T>[] = []) {
+    [...this.effectQueue]
+      .filter((f) => !filter.includes(f) && f !== this.currEffect)
+      .forEach((F) => this.runEffect(F));
+  };
 }
 
 export default Observer;

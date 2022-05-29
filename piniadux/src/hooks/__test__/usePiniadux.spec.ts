@@ -1,5 +1,6 @@
+// 基础功能
 import { renderHook } from '@testing-library/react-hooks';
-import { describe, expect, test, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { usePiniadux } from '../usePiniadux';
 
 const USER = Symbol('user');
@@ -17,7 +18,7 @@ const setUp = () =>
     }),
   );
 
-describe('usePiniadux', () => {
+describe('usePiniadux`s Basic Feature', () => {
   it('should be defined', () => {
     expect(usePiniadux).toBeDefined();
   });
@@ -38,7 +39,9 @@ describe('usePiniadux', () => {
     expect(result.current.store.b.c).toEqual(1);
     result.current.store.b.c = 10;
     expect(result.current.store.b.c).toEqual(10);
+    const { result: result2 } = setUp();
     rerender();
     expect(result.current.store.b.c).toEqual(10);
+    expect(result2.current.store.b.c).toEqual(10);
   });
 });

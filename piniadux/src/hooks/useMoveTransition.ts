@@ -1,6 +1,5 @@
-import { RefObject, useEffect, useLayoutEffect, useRef } from 'react';
+import { RefObject, useLayoutEffect } from 'react';
 import usePiniadux from './usePiniadux';
-import useLatest from './useLatest';
 
 function getRect(element: HTMLElement | null | undefined) {
   if (element === null || element === undefined)
@@ -38,9 +37,9 @@ const useMoveTransition = <T extends HTMLElement>(
   elRef: RefObject<T>,
   id: string | symbol,
 ) => {
-  const { store, observer } = useTransitionStore(id);
+  const { store } = useTransitionStore(id);
+  //仅在挂载触发
   useLayoutEffect(() => {
-    console.log('触发');
     if (!store.hasPosition) {
       //首次挂载无需动画
       store.hasPosition = true;
@@ -53,10 +52,11 @@ const useMoveTransition = <T extends HTMLElement>(
     const { y: lastY, x: lastX } = store;
     const dx = lastX - left;
     const dy = lastY - top;
+    // 恢复原位
     elRef.current!.style.transitionDuration = '0s';
     elRef.current!.style.transform = `translate(${dx}px,${dy}px)`;
-    console.log('给个动画', dx, dy);
     requestAnimationFrame(() => {
+      // 1s到达新位置
       elRef.current!.style.transitionDuration = '1s';
       elRef.current!.style.transform = `translate(0px,0px)`;
       store.x = left;

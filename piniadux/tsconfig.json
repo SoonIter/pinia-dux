@@ -23,5 +23,12 @@
     "noUnusedLocals": false
   },
   "include": ["src/index.ts"],
-  "exclude": ["dist", "node_modules", "**.test.ts", "**.test.tsx"]
+  "exclude": [
+    "dist",
+    "node_modules",
+    "**.test.ts",
+    "**.test.tsx",
+    "**.spec.ts",
+    "**.spec.tsx"
+  ]
 }

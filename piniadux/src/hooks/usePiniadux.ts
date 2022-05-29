@@ -38,12 +38,10 @@ function usePiniadux<IState extends Object>(
       forceUpdate();
     };
     removeTasks.push(() => {
-      store.observer.removeTask(update);
+      store.observer.removeEffect(update);
     });
-    store.observer.addTask(update);
-    return () => {
-      removeTasks.forEach((f) => f());
-    };
+    store.observer.addEffect(update);
+    return () => removeTasks.forEach((f) => f());
   }, []);
   return store;
 }

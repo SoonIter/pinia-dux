@@ -45,7 +45,7 @@ function defineStore<IState extends Object>(
       };
       channelBucket.set(channelId, channel);
       channel.postMessage('need update' + channelId);
-      observer.addTask(emit);
+      observer.addEffect(emit);
     }
   }
   return {
@@ -62,12 +62,12 @@ function getStoreById(id: string) {
 
 function removeStoreTaskById(id: string, task: EffectCallback) {
   const store = getStoreById(id);
-  store.observer.removeTask(task);
+  store.observer.removeEffect(task);
 }
 
 function addStoreTaskById(id: string, task: EffectCallback) {
   const store = getStoreById(id);
-  store.observer.addTask(task);
+  store.observer.removeEffect(task);
 }
 
 export { defineStore, getStoreById, addStoreTaskById, removeStoreTaskById };
