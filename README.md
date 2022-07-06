@@ -27,6 +27,10 @@ npm i piniadux@latest
 yarn add piniadux@latest
 ```
 
+```shell
+pnpm add piniadux@latest
+```
+
 wanna get some guidance and friends.
 
 qq1730214056
