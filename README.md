@@ -13,9 +13,12 @@
 
 [中文](./README.md) | [English](./README.en-US.md)
 
+[中文文档](https://sooniter.github.io/pinia-dux/#/zh-CN)|[Doc](https://sooniter.github.io/pinia-dux/)
+
 一个 piniaAPI 风格的 react 状态管理库。
 
 用 Vue pinia 的 api 写 React
+
 [正在重写，暂时停止维护，可以使用这位大佬的foca](https://github.com/foca-js/foca)
 
 目前支持持久化，和多页面状态同步。
@@ -36,4 +39,3 @@ wanna get some guidance and friends.
 
 qq1730214056
 
-[中文文档](https://sooniter.github.io/pinia-dux/#/zh-CN)
