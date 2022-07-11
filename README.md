@@ -13,7 +13,7 @@
 
 [中文](./README.md) | [English](./README.en-US.md)
 
-[中文文档](https://sooniter.github.io/pinia-dux/#/zh-CN)|[Doc](https://sooniter.github.io/pinia-dux/)
+[中文文档](https://sooniter.github.io/pinia-dux/#/zh-CN) | [Doc](https://sooniter.github.io/pinia-dux/)
 
 一个 piniaAPI 风格的 react 状态管理库。
 
