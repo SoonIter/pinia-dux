@@ -1,12 +1,18 @@
 {
   "name": "piniadux",
-  "type": "module",
-  "version": "latest",
+  "version": "1.3.3",
   "description": "这是一个根据pinia API风格写的react状态管理库",
+  "license": "MIT",
+  "author": {
+    "name": "sooniter",
+    "email": "1730214056@qq.com"
+  },
+  "type": "module",
+  "packageManager": "pnpm@7.5.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc",
+    "build": "pnpm run build",
     "release": "npx tsc && npm publish",
     "coverage": "vitest run --coverage",
     "test": "vitest",
@@ -26,20 +32,15 @@
     "state",
     "redux"
   ],
-  "author": {
-    "name": "sooniter",
-    "email": "a1149625757@126.com"
-  },
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/sooniter/pinia-dux/issues"
   },
   "homepage": "https://sooniter.github.io/pinia-dux/#/zh-CN",
   "devDependencies": {
     "@testing-library/react-hooks": "^8.0.0",
-    "@types/react-test-renderer": "latest",
-    "@types/react": "latest",
-    "@vitejs/plugin-react": "latest",
+    "@types/react-test-renderer": "^18.0.0",
+    "@types/react": "^18.0.15",
+    "@vitejs/plugin-react": "^1.3.2",
     "@vitest/ui": "latest",
     "happy-dom": "latest",
     "jsdom": "latest",
